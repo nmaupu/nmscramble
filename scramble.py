@@ -1,6 +1,7 @@
 #!/usr/bin/python -W ignore::DeprecationWarning
 
-from core.utils import scramble
+from core.cube_utils import scramble
+from core.input import getch
 
 __author__ = 'nmaupu'
 
@@ -18,8 +19,12 @@ axis = {
 
 
 def main():
-    s = scramble(axis['333'], suffixes['333'], 21)
-    print ' '.join(s)
+    k = 'c'
+    # q or Q or ctrl+c
+    while k != 'q' and k != 'Q' and ord(k) != 3:
+        s = scramble(axis['333'], suffixes['333'], 21)
+        print ' '.join(s)
+        k = getch()
 
 
 if __name__ == '__main__':
