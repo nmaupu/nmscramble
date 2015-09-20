@@ -27,7 +27,7 @@ def scramble(axis, suffixes, length):
     """
     #
     # This algorithm must generate a scramble which :
-    #   - Generate a sequence of L, R, U, D, F, B moves such as :
+    #   - Generates a sequence of L, R, U, D, F, B moves such as :
     #      1) The same move does not occur twice in a row
     #      2) There is no sequence such as U D U or more precisely to avoid sequences such as U2 D U2 or U D U'
     #   - For each move, add a suffix for a random amount of that move. So we can generate R, R' or R2
@@ -35,24 +35,23 @@ def scramble(axis, suffixes, length):
     s = []
     last_axis = -1
     len_axis = len(axis)
-    len_suffixes = len(suffixes)
 
+    last_moves = []
     for i in range(0, length+1):
         finished = False
-        last_moves = []
         while not finished:
             row = get_random(len_axis-1)
+
+            if row != last_axis:
+                last_moves = [0] * len(axis[row])
+                last_axis = row
+
             col = get_random(len(axis[row])-1)
 
-
-            # Exact same axis as before, regenerate values
-            if (row, col) == last_axis:
-                continue
-
-            # Appending this value to the scramble
-            s.append(axis[row][col] + get_rand_elt(suffixes))
-            finished = True
-            last_axis = (row, col)
+            if last_moves[col] == 0:
+                last_moves[col] = 1
+                s.append(axis[row][col] + get_rand_elt(suffixes))
+                finished = True
 
     return s
 

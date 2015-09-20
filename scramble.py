@@ -18,7 +18,7 @@ axis = {
 
 
 def main():
-    s = scramble(axis['333'], suffixes['333'], 10)
+    s = scramble(axis['333'], suffixes['333'], 21)
     print ' '.join(s)
 
 
