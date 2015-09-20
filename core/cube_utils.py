@@ -1,4 +1,6 @@
 import random
+import time
+import math
 
 __author__ = 'nmaupu'
 
@@ -55,3 +57,14 @@ def scramble(axis, suffixes, length):
 
     return s
 
+
+class Timer:
+    def __init__(self):
+        self.t = None
+        self.tick()
+
+    def tick(self):
+        self.t = time.time()
+
+    def get_duration(self):
+        return int(math.floor((time.time() - self.t) * 1000))
